@@ -1,7 +1,7 @@
 //import libraries
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { getAllPokemons } from "../../reducers";
 import Card from '../components/Card'
 
@@ -16,10 +16,11 @@ const Home = () => {
  
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={{fontSize: 20, fontWeight: '200', marginTop: 20}}>Pokemon</Text>
+            {/* <Text style={{fontSize: 20, fontWeight: '200', marginTop: 20}}>Pokemon</Text> */}
             <ScrollView contentContainerStyle={styles.ScrollViewStyles}>
                 <View>
-                    {currentPokemon?.map((item) => {    // despliege de Pokemon
+                    {currentPokemon.length ?
+                    currentPokemon?.map((item) => {    // despliege de Pokemon
                         return(
                         <View key = {item.id}>     
                             <Card  
@@ -31,7 +32,17 @@ const Home = () => {
                             />
                         </View>
                         ); 
-                    }) 
+                    })
+                    :
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{fontSize: 20, fontWeight: '200'}}>
+                            Verificando la disponibilidad de los datos...
+                        </Text>
+                        <Image
+                            style={{ width: 200, height: 230}}
+                            source={{uri:'https://s3.amazonaws.com/quipslib/load.gif'}}
+                        />
+                    </View>
                     }
                 </View>
             </ScrollView>

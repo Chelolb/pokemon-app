@@ -1,14 +1,28 @@
 //import libraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Home from '../screen/Home'
+import Home from '../screen/Home';
+import About from '../screen/About';
+import { NavigationContainer } from '@react-navigation/native';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+
+const Drawer = createDrawerNavigator();
+//const Stack = createNativeStackNavigator();
 
 // create a component
 const Main = () => {
     return (
-        <View style={styles.container}>
-            <Home/>
-        </View>
+        <NavigationContainer>
+	      {/* <Stack.Navigator>
+	        <Stack.Screen name="Home - Pokemon" component={Home} />
+	      </Stack.Navigator> */}
+            <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Screen name="Galería - Pokemon" component={Home} />
+                <Drawer.Screen name="Acerca de" component={About} />
+            </Drawer.Navigator>
+	    </NavigationContainer>
     );
 };
 
