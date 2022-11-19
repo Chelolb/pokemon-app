@@ -1,10 +1,10 @@
 //import libraries
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 // create a component
 const Card = ({id, image, name, types }) => {
     return (
-        <View style={styles.container}>
+        <View style={styles.container}>    
             <Image
                 style={styles.img}
                 source={{ uri: image }}
@@ -16,7 +16,7 @@ const Card = ({id, image, name, types }) => {
                         return (
                             <Text style = {styles.typeStyle} key={index}> - {index}</Text>
                         )
-                    })}          
+                    })}  
             </View>
         </View>
     );

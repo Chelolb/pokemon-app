@@ -6,26 +6,29 @@ import { View, Text, StyleSheet } from 'react-native';
 const About = () => {
     return (
         <View style={styles.container}>
-            <Text>Aplicación realizada por:</Text>
+            <Text style={{fontSize: 35, fontWeight: '600', margin: 20}}>
+                PokeApp
+            </Text>
+            <Text>App developer by:</Text>
             <Text style={{fontSize: 35, fontWeight: '400', margin: 20}}>
                 Ing. Marcelo Litwin
             </Text>
             <View style={{borderWidth: 1, borderRadius: 15, padding: 15, margin: 20}}>
                 <Text styles={{}}>
-                    Esta aplicación es una "versión movil" del frontend, 
-                    que consume los datos del API backend de mi versión 
-                    del Proyecto Individual POKEMON.
+                    This application is a "mobile version" of the frontend,
+                     that consumes the data from the API backend of my version
+                     from the my POKEMON's Project.
                 </Text>
             </View>
             <View>
-                <Text style={{margin: 10, fontSize: 15, fontWeight: '200'}}>Tecnologías utilizadas</Text>
+                <Text style={{margin: 10, fontSize: 15, fontWeight: '200'}}>Used technology</Text>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Text>* React Native</Text>
                     <Text>* Redux ToolKit</Text>
                 </View>
             </View>
             <View style={{alignItems: 'center', justifyContent: 'center', margin: 25}}>
-                <Text style={{color: 'red'}}>Aplicación en continua actualización y mejoras</Text>
+                <Text style={{color: 'red'}}>Application in continuous updating and improvements</Text>
             </View>
         </View>
     );

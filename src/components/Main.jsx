@@ -19,8 +19,8 @@ const Main = () => {
 	        <Stack.Screen name="Home - Pokemon" component={Home} />
 	      </Stack.Navigator> */}
             <Drawer.Navigator initialRouteName="Home">
-                <Drawer.Screen name="Galería - Pokemon" component={Home} />
-                <Drawer.Screen name="Acerca de" component={About} />
+                <Drawer.Screen name="Galery - Pokemon" component={Home} />
+                <Drawer.Screen name="About" component={About} />
             </Drawer.Navigator>
 	    </NavigationContainer>
     );
