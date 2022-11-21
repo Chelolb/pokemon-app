@@ -21,7 +21,7 @@ const About = () => {
                 </Text>
             </View>
             <View>
-                <Text style={{margin: 10, fontSize: 15, fontWeight: '200'}}>Used technology</Text>
+                <Text style={{margin: 10, fontSize: 15, fontWeight: '200'}}>Used Technology</Text>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Text>* React Native</Text>
                     <Text>* Redux ToolKit</Text>

@@ -1,5 +1,5 @@
 //import libraries
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
 // create a component
 const Card = ({id, image, name, types }) => {
@@ -14,7 +14,7 @@ const Card = ({id, image, name, types }) => {
             <View style={styles.typeContainer}>
                 {types?.map(index => {
                         return (
-                            <Text style = {styles.typeStyle} key={index}> - {index}</Text>
+                            <Text style = {styles.typeStyle} key={index}>{index}</Text>
                         )
                     })}  
             </View>
@@ -42,13 +42,19 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     cardTitle: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: '200',
     },
     typeContainer: {
         flex: 1,
         flexDirection: 'row',
-        margin: 5
+        marginHorizontal: 5
+    },
+    typeStyle:{
+    alignSelf: 'center',
+    fontSize: 18,
+    marginHorizontal: 10,
+    paddingHorizontal: 5,
     },
 });
 

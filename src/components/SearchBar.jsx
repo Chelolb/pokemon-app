@@ -15,8 +15,8 @@ export default function SearchBar(){
         e.preventDefault()
         if(!name || !isNaN(name)){          // if input is empy
             alert('Must indicate a pokemon to search!');   
-        }else{                              // call endpoint Search By name
-            dispatch(getPokemonByName(name)) 
+        }else{                             // call endpoint Search By name
+            dispatch(getPokemonByName(name.toLowerCase())) 
             setName('');
         }
     }

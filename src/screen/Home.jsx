@@ -2,20 +2,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text, Image, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import { getAllPokemons } from "../../reducers";
-import Card from '../components/Card'
+import { getAllPokemons, cleanDetail } from "../../reducers";
+import Card from '../components/Card';
 import SearchBar from "../components/SearchBar";
+import Button from "../components/Button";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 // create a component
-const Home = () => {
+const Home = ( {navigation} ) => {
 
-    const dispatch = useDispatch();     // call all pokemon endpoint
-    useEffect(() => { dispatch(getAllPokemons()) }, [dispatch]);
-
+    const dispatch = useDispatch();  
+    
+    useEffect(() => { dispatch(getAllPokemons()) }, [dispatch]);    // call all pokemon endpoint
+    
     let currentPokemon = useSelector((state) => state.POKEMONS.allPokemon);
 
- 
+    function handleViewAll(e){       // ViewAll button function                       
+        dispatch(getAllPokemons())   // call endpoint AllView;
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <SearchBar/>
@@ -44,7 +49,8 @@ const Home = () => {
                         return(                      
                         <View key = {item.id}>   
                             <TouchableOpacity
-                                onPress={() => alert(`Link to detail pokemon ${item.id}`)}> 
+                                onPress={() => // call Detail screen and send ID
+                                    navigation.navigate('Pokemon Detail', {itemId: item.id})}> 
                                 <Card  
                                     key = {item.id}
                                     id = {item.id} 
@@ -59,7 +65,21 @@ const Home = () => {
                     })
                     }   
                 </View>
-            </ScrollView>
+               
+            </ScrollView> 
+            
+            { currentPokemon.length === 1  // if have only one card...
+                ?
+                <View style={{marginBottom: 50}}>
+                <Button                         // show ViewAll button
+                    title = 'View All'
+                    onPress={() => handleViewAll()}>
+                </Button>
+                </View>
+                :
+                <View></View>
+            }
+           
         </SafeAreaView>
     );
 };

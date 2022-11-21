@@ -1,25 +1,22 @@
 //import libraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Home from '../screen/Home';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import Menu from './Menu';
+import Create from '../screen/Create';
 import About from '../screen/About';
 import { NavigationContainer } from '@react-navigation/native';
-//import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 const Drawer = createDrawerNavigator();
-//const Stack = createNativeStackNavigator();
 
 // create a component
 const Main = () => {
     return (
         <NavigationContainer>
-	      {/* <Stack.Navigator>
-	        <Stack.Screen name="Home - Pokemon" component={Home} />
-	      </Stack.Navigator> */}
-            <Drawer.Navigator initialRouteName="Home">
-                <Drawer.Screen name="Galery - Pokemon" component={Home} />
+            <Drawer.Navigator initialRouteName="Principal" options={{ headerShown: true }}>
+                <Drawer.Screen name="Principal" component={Menu} options={{ headerShown: true }} />
+                <Drawer.Screen name="Create Pokemon" component={Create} /> 
                 <Drawer.Screen name="About" component={About} />
             </Drawer.Navigator>
 	    </NavigationContainer>
