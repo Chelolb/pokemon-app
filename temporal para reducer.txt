@@ -1,0 +1,80 @@
+
+        case "FILTER_BY_TYPES":
+            const allPokemons = state.allPokemons
+            const statusFiltered = action.payload === "All" ? allPokemons : allPokemons.filter(el => el.types.includes(action.payload) )
+            
+            return {
+                ...state,
+                pokemons: statusFiltered.length ? statusFiltered : [`${action.payload} Pokemons`]
+            }
+
+        case "FILTER_CREATED":
+            const allPokemons2 = state.allPokemons
+            const statusFiltered2 = action.payload === "Created" ? allPokemons2.filter(el => el.createdInDb) : allPokemons2.filter(el => !el.createdInDb) 
+
+            return {
+                ...state,
+                pokemons: action.payload === 'All' ? allPokemons2 : statusFiltered2.length ? statusFiltered2 : ['Pokemons created']
+            }
+
+        case "ORDER_BY_NAME_OR_STRENGH":
+            let sortedArray
+
+            if(action.payload === 'asc'){
+                sortedArray = state.pokemons.sort(function (a, b){
+                        if(a.name > b.name){
+                            return 1;
+                        }
+                        if(b.name > a.name){
+                            return -1;
+                        }
+                        return 0;
+                    }) 
+            }
+            if(action.payload === 'desc'){
+                sortedArray = state.pokemons.sort(function (a, b){
+                        if(a.name > b.name){
+                            return -1;
+                        }
+                        if(b.name > a.name){
+                            return 1;
+                        }
+                        return 0;
+                    }) 
+            }
+
+ 
+
+
+{
+        "id": "fe82aaba-040d-4508-b757-76ba528c556f",
+        "name": "cyberfly",
+        "image": "https://safebooru.org//samples/1682/sample_f967bc4d0febffe045d0e1dce3f0e1bc.jpg?1761615",
+        "hp": 30,
+        "attack": 40,
+        "defense": 45,
+        "speed": 50,
+        "height": "1.5",
+        "weight": "4.2",
+        "createdDb": true,
+        "types": [
+            "ground",
+            "fairy"
+        ]
+    },
+    {
+        "id": "dafc7c07-e98a-4e55-ba7f-4ce28320cd3c",
+        "name": "Pokenew",
+        "image": "http://imagen.com",
+        "hp": 1,
+        "attack": 2,
+        "defense": 3,
+        "speed": 4,
+        "height": "5",
+        "weight": "6",
+        "createdDb": true,
+        "types": [
+            "grass"
+        ]
+    }
+]

@@ -15,7 +15,7 @@ const Home = ( {navigation} ) => {
     
     useEffect(() => { dispatch(getAllPokemons()) }, [dispatch]);    // call all pokemon endpoint
     
-    let currentPokemon = useSelector((state) => state.POKEMONS.allPokemon);
+    let currentPokemon = useSelector((state) => state.POKEMONS.allPokemonFiltered)
 
     function handleViewAll(e){       // ViewAll button function                       
         dispatch(getAllPokemons())   // call endpoint AllView;
@@ -57,6 +57,7 @@ const Home = ( {navigation} ) => {
                                     image = {item.image} 
                                     name ={item.name}  
                                     types = {item.types} 
+                                    attack = {item.attack}
                                 />
                             </TouchableOpacity>
                         </View>

@@ -2,7 +2,7 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 
 // create a component
-const Card = ({id, image, name, types }) => {
+const Card = ({id, image, name, types, attack }) => {
     return (
         <View style={styles.container}>    
             <Image
@@ -17,6 +17,7 @@ const Card = ({id, image, name, types }) => {
                             <Text style = {styles.typeStyle} key={index}>{index}</Text>
                         )
                     })}  
+                <Text>{attack}</Text>       
             </View>
         </View>
     );
