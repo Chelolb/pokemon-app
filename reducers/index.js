@@ -11,6 +11,10 @@ export const pokemonSlice = createSlice({
         allPokemonFiltered: [],
         detailPokemon: [],
         allTypes: [],
+        filterType: [],
+        filterSource: [],
+        sortBy: [],
+        sortDirection: []
     },
     reducers:{
         getAllPokemons(state,action){  
@@ -44,12 +48,17 @@ export const pokemonSlice = createSlice({
                 state.allPokemonFiltered = action.payload === 'all' 
                 ? allPokemon2                       // if Option is ALL
                 : statusFiltered2;                  // if Option es Only Source
+
+                state.filterSource = action.payload
         },
 
         getPokemonSortByName(state, action){
             let sortedArray
+            state.sortBy = "name"
+            state.sortDirection = action.payload
 
             if(action.payload === 'up'){
+
                 sortedArray = state.allPokemonFiltered.sort(function (a, b){
                         if(a.name > b.name){
                             return 1;
@@ -61,6 +70,7 @@ export const pokemonSlice = createSlice({
                     }) 
             }
             if(action.payload === 'down'){
+
                 sortedArray = state.allPokemonFiltered.sort(function (a, b){
                         if(a.name > b.name){
                             return -1;
@@ -75,6 +85,8 @@ export const pokemonSlice = createSlice({
 
         getPokemonSortByAttack(state, action){
             let sortedArray
+            state.sortBy = "attack"
+            state.sortDirection = action.payload
 
             if(action.payload === 'up'){
                 sortedArray = state.allPokemonFiltered.sort(function (a, b){
@@ -103,6 +115,8 @@ export const pokemonSlice = createSlice({
         getPokemonByType(state, action) {
             const allPokemon2 = state.allPokemon
             state.allPokemonFiltered = action.payload === "all" ? allPokemon2 : allPokemon2.filter(el => el.types.includes(action.payload) )   
+            
+            state.filterType = action.payload
         }
 
     }

@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { getAllTypes, createPokemon } from "../../reducers";
 import Button from '../components/Button';
-import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list'
-import { ScrollView } from 'react-native-gesture-handler';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 // create a component
 const Create = ( { navigation }) => {   
 
     const dispatch = useDispatch();
 
-    
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState([]);
+    let items = [];
+
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [hp, setHp] = useState('');
@@ -21,25 +23,24 @@ const Create = ( { navigation }) => {
     const [speed, setSpeed] = useState('');
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
-    const [selected, setSelected] = useState('NONE');
     const [types, setTypes] = useState([]);
 
-    let allTypes = [];
+    let allTypes= [];
 
-    let data =[];
+    let data = [            //  alternative data for picker`s items
+        {label: 'grass', value: "grass"},
+        {label: 'poison', value: "poison"},
+        {label: 'fire', value: "fire"},
+        {label: 'flying', value: "flying"},
+        {label: 'water', value: "water"},
+        {label: 'bug', value: "bug"},
+        {label: 'normal', value: "normal"},
+        {label: 'electric', value: "electric"},
+        {label: 'ground', value: "ground"},
+        {label: 'fairy', value: "fairy"}
+    ]
 
-    // let data = [
-    //     {key: '1', value: "grass"},
-    //     {key: '2', value: "poison"},
-    //     {key: '3', value: "fire"},
-    //     {key: '4', value: "flying"},
-    //     {key: '5', value: "water"},
-    //     {key: '6', value: "bug"},
-    //     {key: '7', value: "normal"},
-    //     {key: '8', value: "electric"},
-    //     {key: '9', value: "ground"},
-    //     {key: '10', value: "fairy"}
-    // ]
+    useEffect(() => { clearInputs() }, []);
 
     function clearInputs(){
         setName('');
@@ -50,40 +51,45 @@ const Create = ( { navigation }) => {
         setSpeed('');
         setHeight('')
         setWeight('')
-        setSelected('')
         setTypes([]);
+        items = [];
     };
 
     useEffect(() => { dispatch(getAllTypes()) }, [dispatch]);    // call all types
             
     allTypes = useSelector((state) => state.POKEMONS.allTypes);
+ 
+    allTypes.length     // load types in  picker's items
+    ? allTypes.map(c => items.push({ label: c.name, value: c.name }))
+    : items = data;
 
-    if (allTypes.length){ 
 
-        let dataTypes = []; // transform id --> key & name --> value
-        if (allTypes) {
-        allTypes.map((item) => {
-            let obj = {
-            key: item.id,
-            value: item.name,
-            }
-            dataTypes.push(obj);
-        });
-        }
-
-        data = dataTypes
-        //console.log(JSON.stringify(dataTypes));
+    function handleType(){      // update Types selected
+        setTypes(value)
     }
-
 
     async function submitForm() {
 
-        if (!name || !hp ||!attack || !defense || !speed || !height || !weight || types.length < 1) {
-            return alert('empty fields')     // if any fields is empty...
+        //console.log(value, types);
+
+        if (!name) {
+            return alert('Empty name`s field')     // if name is empty...
+        };
+
+        if (types.length < 1) {
+            return alert('Indicate at least one type')     // if types's fiel is empty...
+        };
+
+        if (!hp || !attack || !defense || !speed || !height || !weight) {
+            return alert(`Empty fields`)     // if any fields is empty...
+        };
+
+        if (isNaN(hp) || isNaN(attack) || isNaN(defense) || isNaN(speed) || isNaN(height) || isNaN(weight)) {
+            return alert(`Data value isn't number`)     // if any fields is not number...
         };
 
         if (!image) {   // if not image indicate
-            return alert('indicate one URL image')
+            return alert(`Indicate an URL image's field`)
         };
 
         const newPokemon = {
@@ -91,18 +97,19 @@ const Create = ( { navigation }) => {
             types
         };
         //setModalVisible(true)
-        await dispatch(createPokemon(newPokemon));
+        //await dispatch(createPokemon(newPokemon));
         //setModalVisible(false)
+        clearInputs();
             console.log(JSON.stringify(newPokemon))
         alert('The pokemon created successfully');
-        clearInputs();
+        
         navigation.navigate('Principal')
     }
 
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+           
             <View style={styles.containerHeader}>
                 <Text style={styles.txtStyle}>Name:</Text>
                 <TextInput 
@@ -173,25 +180,39 @@ const Create = ( { navigation }) => {
                 </View>
             </View>
              <View style={{width: 260, alignSelf: 'center'}}>
-                <MultipleSelectList 
-                    setSelected={(val) => setSelected(val)} 
-                    data={data} 
-                    save="value"
-                    onSelect={() => setTypes(selected)}
-                    label="Types"
-                    badgeStyles={{backgroundColor: 'green'}}
-                    checkBoxStyles={{backgroundColor: 'lightgreen', borderWidth: 2}}
-                    defaultOption={{ key:'1', value:'grass' }}  //default selected option
+                <DropDownPicker
+                    style={{backgroundColor: '#dfffdf', borderColor: 'green'}}
+                    multiple={true}
+                    min={0}
+                    max={3}
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    onChangeValue ={handleType}
                 />
+                <View style={value.length ? styles.containerValue : styles.containerValue0}>
+                { value 
+                    ? value.map((c, index) => {         //  show selected type
+                        return (
+                            <View style={styles.valueLabel} key={index} >
+                                <Text>{c}</Text>
+                            </View>
+                        )
+                    })
+                    : (null)
+                }
+                </View>
             </View> 
-            <View style={{paddingHorizontal: 100}}>
+            <View style={{paddingHorizontal: 100, marginVertical: 10}}>
                 <Button
                     style={{with: 70, marginVertical: 15}}
                     title = 'Create'
                     onPress={() => submitForm()}>
                 </Button>
             </View>
-            </ScrollView>
+        
         </View>
     );
 };
@@ -247,6 +268,26 @@ const styles = StyleSheet.create({
         width: 50,
         marginVertical: 5,
         backgroundColor: '#fff',
+    },
+    containerValue: {
+        flexDirection: 'row',
+        marginTop: 5,
+        borderWidth: 1, 
+        borderRadius: 5,
+        borderColor: 'green',
+    }, 
+    containerValue0: {
+        borderWidth: 0, 
+    },
+    valueLabel: {
+        backgroundColor: '#dfffdf',
+        width: '30%',
+        height: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        marginVertical: 2,
+        marginHorizontal: 5,
     }
 });
 

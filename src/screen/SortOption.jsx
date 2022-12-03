@@ -77,12 +77,12 @@ const SortOption = ( { navigation } ) => {
     function setFilter() {
         if (option === "name"){
             dispatch(getPokemonSortByName(optionSortName));
-            alert(`Sort by "${option} ${optionSortName}" activado`)
+            alert(`Sort by "${option} ${optionSortName}" activate`)
             navigation.navigate('Principal')
         }
         else {
             dispatch(getPokemonSortByAttack(optionSortAttack));
-            alert(`Sort by "${option} ${optionSortAttack}" activado`)
+            alert(`Sort by "${option} ${optionSortAttack}" activate`)
             navigation.navigate('Principal')
         }
     }

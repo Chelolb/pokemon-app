@@ -21,12 +21,12 @@ const Detail = ( {route, navigation} ) => {
             { detail.id === itemId
             ?           // if data is yet!
             <View>
-                <Text style={styles.cardTitle}>{detail.name}</Text>
                 <Image
                     style={styles.img}
                     source={{ uri: detail.image }}
                 >
                 </Image>
+                <Text style={styles.cardTitle}>{detail.name}</Text>
                 <View style={styles.containerProperties}>
                 <Text style={styles.txtProperties}> HP: {detail.hp}    Attack: {detail.attack}</Text>
                 </View>
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 40,
         fontWeight: '400',
+        marginBottom: 10,
     },
     img: {
         width: 250,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
         borderRadius: 10,
-        margin: 5,
+        marginTop: 15,
     },
     containerProperties: {
         flexDirection: 'row',

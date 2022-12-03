@@ -19,8 +19,8 @@ const Main = () => {
         <NavigationContainer>
             <Drawer.Navigator initialRouteName="Principal" options={{ headerShown: true }}>
                 <Drawer.Screen name="Principal" component={Menu} options={{ headerShown: true }} />
-                <Drawer.Screen name="Type Filter" component={TypeFilter} />
                 <Drawer.Screen name="Source Filter" component={SourceOption} />
+                <Drawer.Screen name="Type Filter" component={TypeFilter} />
                 <Drawer.Screen name="Sort Options" component={SortOption} />
                 <Drawer.Screen name="Pokemon Create" component={Create} /> 
                 <Drawer.Screen name="About" component={About} />
