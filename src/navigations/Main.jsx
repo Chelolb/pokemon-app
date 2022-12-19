@@ -9,6 +9,7 @@ import SortOption from '../screen/SortOption';
 import TypeFilter from '../screen/TypeFilter';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import StackAbout from './StackAbout';
 
 
 const Drawer = createDrawerNavigator();
@@ -23,7 +24,7 @@ const Main = () => {
                 <Drawer.Screen name="Type Filter" component={TypeFilter} />
                 <Drawer.Screen name="Sort Options" component={SortOption} />
                 <Drawer.Screen name="Pokemon Create" component={Create} /> 
-                <Drawer.Screen name="About" component={About} />
+                <Drawer.Screen name="About" component={StackAbout} options={{title: 'About', headerShown: true }} />
             </Drawer.Navigator>
 	    </NavigationContainer>
     );

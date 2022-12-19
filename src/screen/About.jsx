@@ -1,9 +1,10 @@
-//import liraries
+//import libraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Button from '../components/Button';
 
 // create a component
-const About = () => {
+const About = ( { navigation } ) => {
     return (
         <View style={styles.container}>
             <Text style={{fontSize: 35, fontWeight: '600', margin: 20}}>
@@ -21,11 +22,10 @@ const About = () => {
                 </Text>
             </View>
             <View>
-                <Text style={{margin: 10, fontSize: 15, fontWeight: '200'}}>Used Technology</Text>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Text>* React Native</Text>
-                    <Text>* Redux ToolKit</Text>
-                </View>
+                <Button                    // show Technology button
+                    title = 'Show Technology'
+                    onPress={() => navigation.navigate('Technology')}>
+                </Button>
             </View>
             <View style={{alignItems: 'center', justifyContent: 'center', margin: 25}}>
                 <Text style={{color: 'red'}}>Application in continuous updating and improvements</Text>

@@ -1,8 +1,7 @@
 import {createSlice, dispatch } from '@reduxjs/toolkit';
 import axios from 'axios';
-//const ROUTE = 'http://localhost:3001'     // since the PC (host local)
 const ROUTE = 'http://192.168.0.137:3001' // since the device    (host Local)
-//const ROUTE = 'https://pokemon-app-3io8.onrender.com'   // General  (Host deployed)
+
 
 export const pokemonSlice = createSlice({
     name : "POKEMONS",

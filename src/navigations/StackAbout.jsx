@@ -1,26 +1,27 @@
 //import libraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Home from '../screen/Home';
-import Detail from '../screen/Detail';
+import About from '../screen/About';
+import UsedTech from '../screen/UsedTech';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 const Stack = createNativeStackNavigator();
 
-
 // create a component
-const Menu = ( {navigation} ) => {
+const StackAbout = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Pokemon Gallery"
-                component={Home}
-                options={{ headerShown: true }}
+                name="Author"
+                component={About}
+                options={{ headerShown: false }}
             />
             <Stack.Screen 
-                name="Pokemon Detail" 
-                component={Detail} />
+                name="Technology" 
+                component={UsedTech}
+                options={{ headerShown: true }} 
+            />
         </Stack.Navigator>
     );
 };
@@ -31,8 +32,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#2c3e50',
     },
 });
 
 //make this component available to the app
-export default Menu;
+export default StackAbout;
