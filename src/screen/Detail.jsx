@@ -1,7 +1,7 @@
 //import libraries
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import { getPokemonById } from "../../reducers";
 import { ScrollView } from "react-native-gesture-handler";
 import Loading from "../components/Loading";
@@ -9,6 +9,9 @@ import BackButton from '../components/BackButton';
 import AttackTag from '../components/AttackTag';
 import ProgressBar from '../components/ProgressBar';
 import DonutGraph from '../components/DonutGraph';
+
+
+const { width, height } = Dimensions.get('window');
 
 // create a component
 const Detail = ( {route, navigation} ) => {
@@ -38,7 +41,7 @@ const Detail = ( {route, navigation} ) => {
             ?           // if data is yet!
             <View style={{ alignItems: 'center', marginTop: 23}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5,
-                                height: 50 }}>
+                                height: 50, width: width }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', 
                                     backgroundColor: 'blue'}}>
                         <BackButton
